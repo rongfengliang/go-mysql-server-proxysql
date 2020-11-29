@@ -1,0 +1,23 @@
+version: "3"
+services:
+    proxysql: 
+     image: proxysql/proxysql:2.0.15
+     ports: 
+     - "6033:6033"
+     - "6032:6032"
+     volumes:
+     - "./proxysql.cnf:/etc/proxysql.cnf"
+    mysqlserever:
+      build: ./
+      ports: 
+      - "3307:3307"
+    mysql2:
+     image: mysql:5.6
+     command: --character-set-server=utf8
+     ports:
+     - "3308:3306"
+     environment:
+     - MYSQL_ROOT_PASSWORD=dalong
+     - MYSQL_USER=boss
+     - MYSQL_DATABASE=boss
+     - MYSQL_PASSWORD=dalong
